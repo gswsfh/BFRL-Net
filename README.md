@@ -17,3 +17,6 @@ Customize the parameters in the `config.yml` file and run the `python model.py` 
 
 ### Data collect
 Run the `python datacollect.py` with custom parameters. 
+
+### Datasets
+We utilize publicly available datasets, with examples provided in the [dataset](exampledatasets) folder. In addition, we have released the datasets we constructed, including [dataset1](Dataset.md) , for public access.
