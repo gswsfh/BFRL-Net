@@ -5,28 +5,35 @@ import time
 from copy import deepcopy
 import numpy as np
 import torch
+import yaml
 from torch import nn
 from torch.nn import init
 from torch.optim import Adam
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-state_dim = 5
-fea_dim= 16
-action_dim = state_dim
-hidden_dim = 32
-entropy_rate = 0.1
-reward_div_rate = 0.99
-netUpdate_polyak = 0.995
-buffer_size = 100000
-printInfo = 10
-epochs = 20
-score_winsize = 16
-startNetAction_step = 8 * score_winsize
-sampleUpdateMin = fea_dim
-sampleUpdateStep = 200
-learning_rate_actor = 0.0001
-learning_rate_critic = 0.0001
-batch_size = 32
+
+with open('config.yml', 'r') as file:
+    config = yaml.safe_load(file)
+
+state_dim = config['state_dim']
+fea_dim = config['fea_dim']
+action_dim = config['action_dim']
+hidden_dim = config['hidden_dim']
+entropy_rate = config['entropy_rate']
+reward_div_rate = config['reward_div_rate']
+netUpdate_polyak = config['netUpdate_polyak']
+buffer_size = config['buffer_size']
+printInfo = config['printInfo']
+epochs = config['epochs']
+score_winsize = config['score_winsize']
+startNetAction_step = config['startNetAction_step']
+sampleUpdateMin = config['sampleUpdateMin']
+sampleUpdateStep = config['sampleUpdateStep']
+learning_rate_actor = config['learning_rate_actor']
+learning_rate_critic = config['learning_rate_critic']
+batch_size = config['batch_size']
+datasetpath = config['datasetpath']
+modelsavepath = config['modelsavepath']
 
 def loadRawData(filepath):
     data=np.load(filepath)
@@ -496,10 +503,10 @@ class SAC:
 
 if __name__ == '__main__':
 
-    filepath = "filepath"
+    filepath = datasetpath
     dataset = constructDirectionDatasetFromMTWD(filepath)
     sac = SAC(dataset, state_dim=action_dim, act_dim=action_dim, fea_dim=fea_dim)
-    modelpath = "./model.pt"
+    modelpath = modelsavepath
 
     step = 0
     if step == 0:

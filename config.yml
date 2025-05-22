@@ -1,15 +1,19 @@
-FEALENGTH : 10
-PADDINGC : -1
-entropy_rate : 0.1
-reward_div_rate : 0.99
-netUpdate_polyak : 0.995
-buffer_size : 100000
-printInfo : 10
-epochs : 20
-score_winsize : 4
-sampleUpdateMin : 128
-sampleUpdateStep : 16
-learning_rate_actor : 0.01
-learning_rate_critic : 0.01
-batch_size : 128
-hostip : "*" # Please modify
+state_dim: 5
+fea_dim: 16
+action_dim: 5
+hidden_dim: 32
+entropy_rate: 0.1
+reward_div_rate: 0.99
+netUpdate_polyak: 0.995
+buffer_size: 100000
+printInfo: 10
+epochs: 20
+score_winsize: 16
+startNetAction_step: 128
+sampleUpdateMin: 16
+sampleUpdateStep: 200
+learning_rate_actor: 0.0001
+learning_rate_critic: 0.0001
+batch_size: 32
+datasetpath: "exampledatasets/closed_5tab.npz"
+modelsavepath: "model.pt"
